@@ -1,6 +1,20 @@
-<h2>{{ book.title }}</h2>
-<p>Author: {{ book.author }}</p>
-<p>Description: {{ book.description }}</p>
-<p>Quantity: {{ book.quantity }}</p>
+<h1>Library</h1>
 
-<a href="/">Back</a>
+<form action="/search">
+    <input type="text" name="keyword" placeholder="Search book...">
+    <button type="submit">Search</button>
+</form>
+
+<ul>
+    {% for book in books %}
+        <li>
+            <a href="/book/{{ book.id }}">
+                {{ book.title }} - {{ book.author }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>
+
+{% if books|length == 0 %}
+    <p>No books found</p>
+{% endif %}
