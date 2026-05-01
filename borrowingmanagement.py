@@ -35,7 +35,6 @@ class BorrowingManager:
         """
         self.cursor.execute(update_borrow_query, (return_date, final_penalty, borrow_id))        
         update_book_query = "UPDATE Books SET Quantity = Quantity + 1 WHERE Book_id = %s"
-        self.cursor.execute(update_book_query, (record['Book_id'],))
-        
+        self.cursor.execute(update_book_query, (record['Book_id'],))        
         self.db.commit()
         print(f"✅ Hoàn tất! Tiền phạt đã lưu: {final_penalty:,} VNĐ")
