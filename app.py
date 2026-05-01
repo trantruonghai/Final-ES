@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request
 from modelbook import Book
-
 app = Flask(__name__)
 
 #Trang chủ
@@ -20,7 +19,7 @@ def search():
 @app.route('/book/<int:book_id>')
 def book_detail(book_id):
     book = Book.get_book_by_id(book_id)
-    return render_template('book_detail.html', book=book)
+    return render_template('bookdetail.html', book=book)
 
 if __name__ == '__main__':
     app.run(debug=True)

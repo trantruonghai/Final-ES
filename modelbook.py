@@ -1,5 +1,7 @@
 from database import get_db
-class view_book:
+
+class Book:
+
     @staticmethod
     def view_all_book():
         conn = get_db()
@@ -8,6 +10,7 @@ class view_book:
         books = cursor.fetchall()
         conn.close()
         return books
+
     @staticmethod
     def search_book(keyword):
         conn = get_db()
@@ -16,14 +19,14 @@ class view_book:
         cursor.execute(query, ('%' + keyword + '%',))
         books = cursor.fetchall()
         conn.close()
-        return
+        return books
+
     @staticmethod
     def search_book_by_id(book_id):
         conn = get_db()
         cursor = conn.cursor(dictionary=True)
-        query = "SELECT * FROM books WhHERE title LIKE %s"
-        cursor.execute(query, ('%' + keyword + '%',))
-        books = cursor.fetchall()
-        conn.close
-        return books
-    
+        query = "SELECT * FROM books WHERE id = %s"
+        cursor.execute(query, (book_id,))
+        book = cursor.fetchone()
+        conn.close()
+        return book

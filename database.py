@@ -1,8 +1,9 @@
-imoport (mysql) #ten database
+import mysql.connector
+
 def get_db():
-    return (mysql).connect(
+    return mysql.connector.connect(
         host="localhost",
         user="root",
         password="",
-        database="librarydb",
+        database="library_db"
     )
