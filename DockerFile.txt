@@ -1,0 +1,17 @@
+# Sử dụng Python phiên bản nhẹ (slim) để giảm dung lượng file nộp
+FROM python:3.9-slim
+
+# Thiết lập thư mục làm việc trong container
+WORKDIR /app
+
+# Sao chép toàn bộ file từ máy tính vào container
+COPY . /app
+
+# Cài đặt các thư viện cần thiết (Flask và các phụ thuộc)
+RUN pip install --no-cache-dir flask flask-sqlalchemy
+
+# Thông báo port mà ứng dụng sẽ chạy (mặc định Flask là 5000)
+EXPOSE 5000
+
+# Lệnh để chạy ứng dụng khi khởi động container
+CMD ["python", "app.py"]
