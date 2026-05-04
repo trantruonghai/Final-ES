@@ -1,20 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <title>Thông tin cá nhân</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body onload="loadProfile()">
 
-<h2>Profile</h2>
+<div class="profile-container">
+    <h2>Thông tin người dùng</h2>
+    
+    <label for="name">Họ và tên:</label><br>
+    <input type="text" id="name" placeholder="Đang tải..."><br>
+    
+    <label for="email">Email (Không thể sửa):</label><br>
+    <input type="email" id="email" disabled><br>
 
-<input id="name"><br>
-<input id="email" disabled><br>
+    <div class="button-group">
+        <button onclick="updateProfile()">Cập nhật thông tin</button>
+        <button onclick="resetPassword()">Đổi mật khẩu</button>
+        <button onclick="deleteAccount()" style="background-color: red; color: white;">Xóa tài khoản</button>
+    </div>
 
-<button onclick="updateProfile()">Update</button>
-<button onclick="resetPassword()">Reset Password</button>
-<button onclick="deleteAccount()">Delete</button>
-
-<p id="message"></p>
+    <p id="message"></p>
+</div>
 
 <script src="script.js"></script>
 </body>
