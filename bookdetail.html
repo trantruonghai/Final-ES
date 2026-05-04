@@ -5,41 +5,65 @@
     <title>Book Detail</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #eee;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+            margin: 0;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
         }
 
         .container {
-            background: white;
-            padding: 30px 40px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            width: 350px;
-            text-align: center;
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            width: 380px;
+            transition: 0.3s;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
         }
 
         h2 {
             margin-bottom: 20px;
+            color: #333;
+            text-align: center;
         }
 
-        p {
-            text-align: left;
-            margin: 8px 0;
+        .info {
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #f5f7fa;
+            border-radius: 8px;
         }
 
-        a {
-            display: inline-block;
-            margin-top: 15px;
+        .info strong {
+            color: #555;
+        }
+
+        .info span {
+            display: block;
+            margin-top: 3px;
+            color: #222;
+        }
+
+        .btn {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            padding: 10px;
+            background: #4A90E2;
+            color: white;
             text-decoration: none;
-            color: blue;
+            border-radius: 8px;
+            transition: 0.2s;
         }
 
-        a:hover {
-            text-decoration: underline;
+        .btn:hover {
+            background: #357ABD;
         }
     </style>
 </head>
@@ -47,11 +71,23 @@
 
 <div class="container">
     <h2>{{ book.title }}</h2>
-    <p><strong>Author:</strong> {{ book.author }}</p>
-    <p><strong>Description:</strong> {{ book.description }}</p>
-    <p><strong>Quantity:</strong> {{ book.quantity }}</p>
 
-    <a href="/">Back</a>
+    <div class="info">
+        <strong>Author:</strong>
+        <span>{{ book.author }}</span>
+    </div>
+
+    <div class="info">
+        <strong>Description:</strong>
+        <span>{{ book.description }}</span>
+    </div>
+
+    <div class="info">
+        <strong>Quantity:</strong>
+        <span>{{ book.quantity }}</span>
+    </div>
+
+    <a href="/" class="btn">← Back</a>
 </div>
 
 </body>
