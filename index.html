@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LibraSystem</title>
+  <link rel="stylesheet" href="/static/css/style.css"/>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="/" class="brand">📚 LibraSystem</a>
+  <div class="nav-links">
+    <a href="/" class="active">Trang chủ</a>
+    <a href="/borrow">Mượn sách</a>
+    <a href="/profile">Hồ sơ</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <h1>Khám phá kho sách</h1>
+  <p>Tìm kiếm trong <strong>{{ books|length }}</strong> đầu sách</p>
+  <div class="search-bar">
+    <input id="q" type="text" placeholder="Nhập tên sách, tác giả, ISBN..."/>
+    <button onclick="doSearch()">Tìm kiếm</button>
+  </div>
+</section>
+
+<main class="container">
+
+  <div class="stats-row">
+    <div class="stat-card">
+      <span class="stat-num" id="stat-total">{{ books|length }}</span>
+      <span class="stat-lbl">Tổng số sách</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num">{{ books|selectattr('available_qty','gt',0)|list|length }}</span>
+      <span class="stat-lbl">Còn sẵn</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num">{{ categories|length }}</span>
+      <span class="stat-lbl">Thể loại</span>
+    </div>
+  </div>
+
+  <div class="filter-bar">
+    <span class="filter-label">Thể loại:</span>
+    <button class="chip active" onclick="setCategory('', this)">Tất cả</button>
+    {% for cat in categories %}
+    <button class="chip" onclick="setCategory('{{ cat }}', this)">{{ cat }}</button>
+    {% endfor %}
+    <label class="chip-check">
+      <input type="checkbox" id="avail-only" onchange="doSearch()"/> Còn sách
+    </label>
+  </div>
+
+  <div class="book-grid" id="book-grid">
+    {% for book in books %}
+    <a class="book-card" href="/book/{{ book.id }}"
+       data-title="{{ book.title }}"
+       data-author="{{ book.author }}"
+       data-cat="{{ book.category }}"
+       data-avail="{{ book.available_qty }}">
+      <div class="book-cover cat-{{ book.category|replace(' ','') }}">
+        {{ book.title[0] }}
+      </div>
+      <div class="book-body">
+        <div class="book-title">{{ book.title }}</div>
+        <div class="book-author">{{ book.author }}</div>
+        <div class="book-footer">
+          <span class="badge cat-tag">{{ book.category }}</span>
+          {% if book.available_qty > 0 %}
+          <span class="badge avail">Còn {{ book.available_qty }}</span>
+          {% else %}
+          <span class="badge unavail">Hết sách</span>
+          {% endif %}
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+
+  <div class="empty-state" id="empty-state" style="display:none">
+    <div class="empty-icon">🔍</div>
+    <p>Không tìm thấy sách phù hợp.</p>
+    <small>Thử từ khóa khác hoặc bỏ bộ lọc.</small>
+  </div>
+
+</main>
+
+<script src="/static/js/search.js"></script>
+</body>
+</html>
