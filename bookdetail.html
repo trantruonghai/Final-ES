@@ -1,94 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <title>Book Detail</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: linear-gradient(135deg, #74ebd5, #ACB6E5);
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .container {
-            background: #fff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            width: 380px;
-            transition: 0.3s;
-        }
-
-        .container:hover {
-            transform: translateY(-5px);
-        }
-
-        h2 {
-            margin-bottom: 20px;
-            color: #333;
-            text-align: center;
-        }
-
-        .info {
-            margin-bottom: 15px;
-            padding: 10px;
-            background: #f5f7fa;
-            border-radius: 8px;
-        }
-
-        .info strong {
-            color: #555;
-        }
-
-        .info span {
-            display: block;
-            margin-top: 3px;
-            color: #222;
-        }
-
-        .btn {
-            display: block;
-            margin-top: 20px;
-            text-align: center;
-            padding: 10px;
-            background: #4A90E2;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: 0.2s;
-        }
-
-        .btn:hover {
-            background: #357ABD;
-        }
-    </style>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{{ book.title }} — LibraSystem</title>
+  <link rel="stylesheet" href="/static/css/style.css"/>
 </head>
 <body>
 
-<div class="container">
-    <h2>{{ book.title }}</h2>
+<nav class="navbar">
+  <a href="/" class="brand">📚 LibraSystem</a>
+  <div class="nav-links">
+    <a href="/">Trang chủ</a>
+    <a href="/borrow">Mượn sách</a>
+    <a href="/profile">Hồ sơ</a>
+  </div>
+</nav>
 
-    <div class="info">
-        <strong>Author:</strong>
-        <span>{{ book.author }}</span>
+<main class="container">
+
+  <a href="/" class="back-link">← Quay lại danh sách</a>
+
+  <div class="detail-card">
+    <div class="detail-top">
+      <div class="detail-cover cat-{{ book.category|replace(' ','') }}">
+        {{ book.title[0] }}
+      </div>
+      <div class="detail-info">
+        <h1 class="detail-title">{{ book.title }}</h1>
+        <p class="detail-author">{{ book.author }}</p>
+        <div class="detail-tags">
+          <span class="badge cat-tag">{{ book.category }}</span>
+          {% if book.available_qty > 0 %}
+          <span class="badge avail">Còn {{ book.available_qty }} / {{ book.total_qty }} cuốn</span>
+          {% else %}
+          <span class="badge unavail">Hết sách</span>
+          {% endif %}
+        </div>
+        {% if book.available_qty > 0 %}
+        <a href="/borrow?book_id={{ book.id }}" class="btn-borrow">Mượn sách này</a>
+        {% else %}
+        <button class="btn-borrow" disabled>Hiện đang hết sách</button>
+        {% endif %}
+      </div>
     </div>
 
-    <div class="info">
-        <strong>Description:</strong>
-        <span>{{ book.description }}</span>
+    {% if book.description %}
+    <div class="detail-section">
+      <h2>Giới thiệu</h2>
+      <p class="detail-desc">{{ book.description }}</p>
     </div>
+    {% endif %}
 
-    <div class="info">
-        <strong>Quantity:</strong>
-        <span>{{ book.quantity }}</span>
+    <div class="detail-section">
+      <h2>Thông tin sách</h2>
+      <table class="detail-table">
+        <tr><td>ISBN</td><td>{{ book.isbn or '—' }}</td></tr>
+        <tr><td>Nhà xuất bản</td><td>{{ book.publisher or '—' }}</td></tr>
+        <tr><td>Năm xuất bản</td><td>{{ book.publish_year or '—' }}</td></tr>
+        <tr><td>Thể loại</td><td>{{ book.category }}</td></tr>
+        <tr><td>Số lượng tổng</td><td>{{ book.total_qty }} cuốn</td></tr>
+        <tr><td>Đang có sẵn</td><td>{{ book.available_qty }} cuốn</td></tr>
+      </table>
     </div>
+  </div>
 
-    <a href="/" class="btn">← Back</a>
-</div>
+</main>
 
 </body>
 </html>
