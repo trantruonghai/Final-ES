@@ -36,3 +36,15 @@
 - Xử lý:
   - Trường hợp không có kết quả tìm kiếm
   - Đảm bảo hiển thị dữ liệu nhanh và chính xác
+ 
+    ## 5. Công việc của Phong (Borrowing & Penalty Logic)
+•	Lập trình: Xử lý logic nghiệp vụ phức tạp nhất tại lớp BorrowManagement. 
+•	Chức năng: Viết code cho Use Case: Borrow Book (check tồn kho), Return Book (cập nhật số lượng), Calculate Penalty (tự động tính tiền phạt dựa trên số ngày quá hạn) . 
+•	Kiểm thử: Chạy thử các kịch bản quá hạn để kiểm tra tính chính xác của tiền phạt. 
+
+## 6. Công việc của Đức (History & Admin Dashboard)
+•	Lập trình: Thiết kế giao diện Trang Lịch sử mượn trả và Trang Quản trị (Admin Page) . 
+•	Chức năng: Triển khai Use Case: View Borrowing History, Manage Book (Add/Edit/Remove), Manage Member và Manage Borrowing Activities . 
+•	Kiểm thử: Kiểm tra các ràng buộc dữ liệu (ví dụ: không được xóa sách khi đang có người mượn). 
+
+
